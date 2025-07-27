@@ -1,0 +1,29 @@
+local P = game:GetService("Players")
+local RS = game:GetService("RunService")
+
+local plr = P.LocalPlayer
+local char = plr.Character or plr.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+local function tp(pos)
+    if hrp then
+        hrp.CFrame = CFrame.new(pos + Vector3.new(0,5,0))
+    end
+end
+
+local function tpAC()
+    local ac = game.Workspace:FindFirstChild("ActiveCarts")
+    if not ac then return end
+    
+    for _, m in pairs(ac:GetChildren()) do
+        if m:IsA("Model") then
+            local b = m:FindFirstChild("Base")
+            if b and b:IsA("BasePart") then
+                tp(b.Position)
+                wait(2)
+            end
+        end
+    end
+end
+
+tpAC()
