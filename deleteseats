@@ -1,0 +1,37 @@
+local ws = game:GetService("Workspace")
+local rs = game:GetService("RunService")
+
+local int = 0.25
+local l = tick()
+
+local function clr(s)
+    if s and s:IsA("Folder") then
+        local k = s:GetChildren()
+        for i = 1, #k do
+            k[i]:Destroy()
+        end
+    end
+end
+
+local function p()
+    local ac = ws:FindFirstChild("ActiveCarts")
+    if not ac then return end
+    for _, m in pairs(ac:GetChildren()) do
+        if m:IsA("Model") then
+            local s = m:FindFirstChild("Seats")
+            if s then
+                clr(s)
+            end
+        end
+    end
+end
+
+local function hb()
+    local now = tick()
+    if now - l >= int then
+        p()
+        l = now
+    end
+end
+
+rs.Heartbeat:Connect(hb)
