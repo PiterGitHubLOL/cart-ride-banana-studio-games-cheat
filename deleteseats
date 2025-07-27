@@ -1,7 +1,7 @@
 local ws = game:GetService("Workspace")
 local rs = game:GetService("RunService")
 
-local int = 0.25
+local int = 0
 local l = tick()
 
 local function clr(s)
